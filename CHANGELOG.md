@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.76.16-4 (2019/03/15)
+
+* Upgrade to mRemoteNG 1.76.16
+
 ## 1.76.15-3 (2019/03/09)
 
 * Upgrade to mRemoteNG 1.76.15
