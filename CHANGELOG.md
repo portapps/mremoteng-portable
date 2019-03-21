@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.76.18-5 (2019/03/21)
+
+* Upgrade to mRemoteNG 1.76.18
+* Portapps 1.20.3
+
 ## 1.76.16-4 (2019/03/15)
 
 * Upgrade to mRemoteNG 1.76.16
