@@ -12,13 +12,15 @@
 
 ## Notice of Non-Affiliation and Disclaimer
 
-Portapps is not affiliated, associated, authorized, endorsed by, or in any way officially connected with mRemoteNG, or any of its subsidiaries or its affiliates. The official mRemoteNG website can be found at https://mremoteng.org.
+Portapps is not affiliated, associated, authorized, endorsed by, or in any way officially connected with mRemoteNG™, or any of its subsidiaries or its affiliates.
 
-The name mRemoteNG® as well as related names, marks, emblems and images are registered trademarks of their respective owners.
+The official mRemoteNG™ website can be found at https://mremoteng.org.
+
+The name mRemoteNG™ as well as related names, marks, emblems and images are registered trademarks of their respective owners.
 
 ## About
 
-mRemoteNG portable app made with 🚀 [Portapps](https://portapps.io).<br />
+mRemoteNG™ portable app made with 🚀 [Portapps](https://portapps.io).<br />
 Documentation and downloads can be found on https://portapps.io/app/mremoteng-portable/
 
 ## How can I help ?
