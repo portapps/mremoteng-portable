@@ -7,20 +7,21 @@ import (
 	"os"
 	"path/filepath"
 
-	. "github.com/portapps/portapps"
-	"github.com/portapps/portapps/pkg/utl"
+	"github.com/portapps/portapps/v2"
+	"github.com/portapps/portapps/v2/pkg/log"
+	"github.com/portapps/portapps/v2/pkg/utl"
 )
 
 var (
-	app *App
+	app *portapps.App
 )
 
 func init() {
 	var err error
 
 	// Init app
-	if app, err = New("mremoteng-portable", "mRemoteNG"); err != nil {
-		Log.Fatal().Err(err).Msg("Cannot initialize application. See log file for more info.")
+	if app, err = portapps.New("mremoteng-portable", "mRemoteNG"); err != nil {
+		log.Fatal().Err(err).Msg("Cannot initialize application. See log file for more info.")
 	}
 }
 
@@ -36,12 +37,12 @@ func main() {
 	aSettings := utl.PathJoin(app.AppPath, "mRemoteNG.settings")
 	if !utl.Exists(dSettings) {
 		if err := utl.WriteToFile(dSettings, `<?xml version="1.0" encoding="utf-8"?><settings/>`); err != nil {
-			Log.Fatal().Err(err).Msg("Cannot write to mRemoteNG.settings")
+			log.Fatal().Err(err).Msg("Cannot write to mRemoteNG.settings")
 		}
 	}
 	_ = os.Remove(aSettings)
 	if err := os.Symlink(dSettings, aSettings); err != nil {
-		Log.Fatal().Err(err).Msg("Cannot create symlink to mRemoteNG.settings")
+		log.Fatal().Err(err).Msg("Cannot create symlink to mRemoteNG.settings")
 	}
 
 	// extApps.xml exists in data ? Create symlink and remove old one
@@ -50,7 +51,7 @@ func main() {
 	if utl.Exists(dExtApps) {
 		_ = os.Remove(aExtApps)
 		if err := os.Symlink(dExtApps, aExtApps); err != nil {
-			Log.Fatal().Err(err).Msg("Cannot create symlink to extApps.xml")
+			log.Fatal().Err(err).Msg("Cannot create symlink to extApps.xml")
 		}
 	}
 
@@ -60,7 +61,7 @@ func main() {
 	if utl.Exists(dPnlLayout) {
 		_ = os.Remove(aPnlLayout)
 		if err := os.Symlink(dPnlLayout, aPnlLayout); err != nil {
-			Log.Fatal().Err(err).Msg("Cannot create symlink to pnlLayout.xml")
+			log.Fatal().Err(err).Msg("Cannot create symlink to pnlLayout.xml")
 		}
 	}
 
@@ -71,39 +72,39 @@ func main() {
 		aConfCons := utl.PathJoin(app.AppPath, "confCons.xml")
 		if !utl.Exists(dConfCons) && utl.Exists(aConfCons) {
 			if err := utl.CopyFile(aConfCons, dConfCons); err != nil {
-				Log.Error().Err(err).Msg("Cannot copy confCons.xml")
+				log.Error().Err(err).Msg("Cannot copy confCons.xml")
 			}
 			_ = os.Remove(aConfCons)
 			if err := os.Symlink(dConfCons, aConfCons); err != nil {
-				Log.Error().Err(err).Msg("Cannot create symlink to confCons.xml")
+				log.Error().Err(err).Msg("Cannot create symlink to confCons.xml")
 			}
 		}
 		oldConfConsFiles, _ := filepath.Glob(utl.PathJoin(app.AppPath, "confCons*"))
 		for _, oldConfConsFile := range oldConfConsFiles {
 			if err := os.Remove(oldConfConsFile); err != nil {
-				Log.Error().Err(err).Msg("Cannot remove old confCons file")
+				log.Error().Err(err).Msg("Cannot remove old confCons file")
 			}
 		}
 
 		// extApps.xml handling on close
 		if !utl.Exists(dExtApps) && utl.Exists(aExtApps) {
 			if err := utl.CopyFile(aExtApps, dExtApps); err != nil {
-				Log.Error().Err(err).Msg("Cannot copy extApps.xml")
+				log.Error().Err(err).Msg("Cannot copy extApps.xml")
 			}
 			_ = os.Remove(aExtApps)
 			if err := os.Symlink(dExtApps, aExtApps); err != nil {
-				Log.Error().Err(err).Msg("Cannot create symlink to extApps.xml")
+				log.Error().Err(err).Msg("Cannot create symlink to extApps.xml")
 			}
 		}
 
 		// pnlLayout.xml handling on close
 		if !utl.Exists(dPnlLayout) && utl.Exists(aPnlLayout) {
 			if err := utl.CopyFile(aPnlLayout, dPnlLayout); err != nil {
-				Log.Error().Err(err).Msg("Cannot copy pnlLayout.xml")
+				log.Error().Err(err).Msg("Cannot copy pnlLayout.xml")
 			}
 			_ = os.Remove(aPnlLayout)
 			if err := os.Symlink(dPnlLayout, aPnlLayout); err != nil {
-				Log.Error().Err(err).Msg("Cannot create symlink to pnlLayout.xml")
+				log.Error().Err(err).Msg("Cannot create symlink to pnlLayout.xml")
 			}
 		}
 	}()
